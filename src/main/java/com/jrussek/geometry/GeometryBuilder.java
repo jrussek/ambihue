@@ -3,10 +3,8 @@ package com.jrussek.geometry;
 import com.google.common.collect.Lists;
 
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryCollection;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.math.Vector2D;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
  */
 public class GeometryBuilder {
 
-  private GeometricShapeFactory gsf = new GeometricShapeFactory();
   private GeometryFactory gf = new GeometryFactory();
   private List<Point> pointList = Lists.newArrayList();
   private Point center;
@@ -55,7 +52,7 @@ public class GeometryBuilder {
     Vector2D leftEdgeVector = zeroDegreeVector.rotate(-rotationAngle - theta);
     Vector2D rightEdgeVector = zeroDegreeVector.rotate(-rotationAngle + theta);
 
-    Polygon area = gf.createPolygon(
+    Polygon area = gf.createPolygon(   // TODO: include outer edges of the envelope
         new Coordinate[]{
             center.getCoordinate(),
             new Coordinate(center.getX() + leftEdgeVector.getX(),
